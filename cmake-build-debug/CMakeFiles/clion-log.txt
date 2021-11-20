@@ -1,0 +1,4 @@
+/home/jean/CLion_JetBrain/clion-213.5744.5/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/home/jean/CLion_JetBrain/clion-213.5744.5/bin/ninja/linux/ninja -G Ninja /home/jean/src/matrice
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/jean/src/matrice/cmake-build-debug
