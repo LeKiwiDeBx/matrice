@@ -1,0 +1,8 @@
+{
+  "execPath": "/usr/bin/gcc",
+  "gccDefaultCFlags": "-Wall -std=c11",
+  "gccDefaultCppFlags": "-Wall -std=c++11",
+  "gccErrorLimit": 15,
+  "gccIncludePaths": "/usr/include/glib-2.0, /usr/include/glib-2.0/glib, /usr/lib/x86_64-linux-gnu/glib-2.0/include",
+  "gccSuppressWarnings": false
+}

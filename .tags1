@@ -1,0 +1,27 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	0	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+fp	/home/jean/src/matrice/matrice.c	/^static FILE *fp = NULL;$/;"	variable	line:5	file:
+val	/home/jean/src/matrice/matrice.c	/^static int val[11] = {0};$/;"	variable	line:6	file:
+nb_matrice	/home/jean/src/matrice/matrice.c	/^static int nb_matrice = 0;$/;"	variable	line:7	file:
+nmatrice	/home/jean/src/matrice/matrice.c	/^static char nmatrice[255], bound[10];$/;"	variable	line:8	file:
+bound	/home/jean/src/matrice/matrice.c	/^static char nmatrice[255], bound[10];$/;"	variable	line:8	file:
+listMatrice	/home/jean/src/matrice/matrice.c	/^GSList *listMatrice = NULL;$/;"	variable	line:10
+MATRICE	/home/jean/src/matrice/matrice.c	/^typedef struct MATRICE {$/;"	struct	line:12	file:
+id	/home/jean/src/matrice/matrice.c	/^  unsigned char id;$/;"	member	line:13	struct:MATRICE	file:
+name	/home/jean/src/matrice/matrice.c	/^  char *name;$/;"	member	line:14	struct:MATRICE	file:
+valPeg	/home/jean/src/matrice/matrice.c	/^  int valPeg[11][11];$/;"	member	line:15	struct:MATRICE	file:
+s_matrice	/home/jean/src/matrice/matrice.c	/^} s_matrice;$/;"	typedef	line:16	typeref:struct:MATRICE	file:
+currentMatrice	/home/jean/src/matrice/matrice.c	/^s_matrice currentMatrice;$/;"	variable	line:18
+pmatrice	/home/jean/src/matrice/matrice.c	/^typedef s_matrice *pmatrice;$/;"	typedef	line:20	file:
+_setValueMatrice	/home/jean/src/matrice/matrice.c	/^static void _setValueMatrice() {$/;"	function	line:34	file:
+_serializeMatrice	/home/jean/src/matrice/matrice.c	/^static void _serializeMatrice(unsigned char id, char *name, int m[11][11]) {$/;"	function	line:50	file:	signature:(unsigned char id, char *name, int m[11][11])
+_getNumberMatrice	/home/jean/src/matrice/matrice.c	/^static int _getNumberMatrice() { return nb_matrice; }$/;"	function	line:71	file:
+_getNameMatrice	/home/jean/src/matrice/matrice.c	/^static char *_getNameMatrice() {$/;"	function	line:76	file:
+openFileMatrice	/home/jean/src/matrice/matrice.c	/^FILE *openFileMatrice() {$/;"	function	line:87
+readFileMatrice	/home/jean/src/matrice/matrice.c	/^void readFileMatrice() {$/;"	function	line:97
+closeFileMatrice	/home/jean/src/matrice/matrice.c	/^void closeFileMatrice() {$/;"	function	line:116
+main	/home/jean/src/matrice/matrice.c	/^int main(int argc, char const *argv[]) {$/;"	function	line:124	signature:(int argc, char const *argv[])
