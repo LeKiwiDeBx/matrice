@@ -32,6 +32,15 @@ static void closeFileMatrice();
 void printValue(pmatrice, void *);
 void getNameList(pmatrice, char **);
 void getNameListMatrice();
+void getMatriceList(guint, int [][11]);
+
+/**
+*
+*/
+void getMatriceList(guint index, int m[][11]){
+  gpointer* pm = g_slist_nth_data(listMatrice, index);
+}
+
 /**
  *
  */
