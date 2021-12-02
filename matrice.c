@@ -32,13 +32,16 @@ static void closeFileMatrice();
 void printValue(pmatrice, void *);
 void getNameList(pmatrice, char **);
 void getNameListMatrice();
-void getMatriceList(guint, int [][11]);
+gpointer getMatriceList(guint, int[11][11]);
 
-/**
-*
-*/
-void getMatriceList(guint index, int m[][11]){
-  gpointer* pm = g_slist_nth_data(listMatrice, index);
+gpointer getMatriceList(guint index, int m[11][11]) {
+  pmatrice pm = g_slist_nth_data(listMatrice, index);
+  for (size_t i = 0; i < 11; i++) {
+    for (size_t j = 0; j < 11; j++) {
+      m[i][j] = pm->valPeg[i][j];
+    }
+  }
+  return pm;
 }
 
 /**
@@ -188,5 +191,21 @@ int main(int argc, char const *argv[]) {
   }
   // on travaille sur la GSList (fichier serializé)
   getNameListMatrice();
+  int m[11][11];
+  /*
+  * 0: english 1: german
+  * zone test
+  *
+  *
+  **/
+  getMatriceList(0, m);
+  for (size_t i = 0; i < 11; i++) {
+    for (size_t j = 0; j < 11; j++) {
+      printf("%d ", m[i][j]);
+
+    }
+    printf("\n");
+  }
+
   return 0;
 }
