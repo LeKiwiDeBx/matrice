@@ -15,9 +15,8 @@ typedef struct MATRICE {
   int valPeg[11][11];
 } s_matrice;
 
-s_matrice currentMatrice;
-
 typedef s_matrice *pmatrice;
+pmatrice pcurrentMatrice;
 
 static int _getNumberMatrice();
 static char *_getNameMatrice();
@@ -31,11 +30,11 @@ static void closeFileMatrice();
 // function de GSList
 void printValue(pmatrice, void *);
 void getNameList(pmatrice, char **);
-void getNameListMatrice();
+void getNameListMatrice(int);
 gpointer getMatriceList(guint, int[11][11]);
 
 gpointer getMatriceList(guint index, int m[11][11]) {
-  pmatrice pm = g_slist_nth_data(listMatrice, index);
+  pmatrice pm = g_slist_nth_data(listMatrice, index - 1);
   for (size_t i = 0; i < 11; i++) {
     for (size_t j = 0; j < 11; j++) {
       m[i][j] = pm->valPeg[i][j];
@@ -77,9 +76,9 @@ void printValue(pmatrice pm, void *p) {
  */
 static void _serializeMatrice(const char *name,
                               void (*pfSetMatrice)(int valPeg[][11])) {
-  static unsigned char ind = 1;
+  static unsigned char index = 1;
   pmatrice pm = g_new(s_matrice, 1);
-  pm->id = ind++;
+  pm->id = index++;
   pm->name = g_strdup(name);
   pfSetMatrice(pm->valPeg);
   listMatrice = g_slist_append(listMatrice, pm);
@@ -159,7 +158,7 @@ void getNameList(pmatrice pm, char **p) {
 /**
  *
  */
-void getNameListMatrice() {
+void getNameListMatrice(int index) {
   char **p = (char **)malloc(sizeof(*p) * nb_matrice);
   if (p != NULL) {
     for (int i = 0; i < nb_matrice; i++) {
@@ -170,7 +169,7 @@ void getNameListMatrice() {
   } else
     exit(EXIT_FAILURE);
   g_slist_foreach(listMatrice, (GFunc)getNameList, p);
-  printf("\nDEBUG nom des matrices %s %s\n", p[0], p[1]);
+  printf("\nDEBUG nom de la matrice index %d est %s\n", index, p[index - 1]);
 }
 
 /**
@@ -190,22 +189,20 @@ int main(int argc, char const *argv[]) {
     closeFileMatrice();
   }
   // on travaille sur la GSList (fichier serializé)
-  getNameListMatrice();
-  int m[11][11];
+  int index = 1; // DEBUG
+  getNameListMatrice(index);
   /*
-  * 0: english 1: german
-  * zone test
-  *
-  *
-  **/
-  getMatriceList(0, m);
+   * 1: english 2: german
+   * zone test
+   **/
+  int m[11][11];
+  pcurrentMatrice = getMatriceList(index, m);
+  printf("\nNom de la matrice courante %s\n", pcurrentMatrice->name);
   for (size_t i = 0; i < 11; i++) {
     for (size_t j = 0; j < 11; j++) {
       printf("%d ", m[i][j]);
-
     }
     printf("\n");
   }
-
   return 0;
 }
