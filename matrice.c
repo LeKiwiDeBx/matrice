@@ -1,9 +1,14 @@
+/**
+* @author LeKiwiDeBx (c) [°}<couak!>
+* Friday, December 3, 2021 7:20 PM
+* @version alpha 0.1
+* @license GNU GPL v3 License
+*/
 #include <glib.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 static FILE *fp = NULL;
-//  static int val[11] = {0};
 static int nb_matrice = 0;
 static char nmatrice[255], bound[10];
 
@@ -33,6 +38,12 @@ void getNameList(pmatrice, char **);
 void getNameListMatrice(int);
 gpointer getMatriceList(guint, int[11][11]);
 
+/**
+* @brief recupere la matrice nieme de la GList (matrice)
+* @param index numero de la matrice
+* @param m[][] tableau pour les valeurs de la matrice choisie
+* @return la structure de la matrice nieme (index)
+*/
 gpointer getMatriceList(guint index, int m[11][11]) {
   pmatrice pm = g_slist_nth_data(listMatrice, index - 1);
   for (size_t i = 0; i < 11; i++) {
@@ -44,7 +55,9 @@ gpointer getMatriceList(guint index, int m[11][11]) {
 }
 
 /**
- *
+ * @brief renseigne pour serializer la matrice en cours du fichier
+ * @param valPeg[][] tableau de la matrice à serializer
+ * @return
  */
 static void _setValueMatrice(int valPeg[][11]) {
   for (size_t i = 0; i < 11; i++) {
@@ -56,8 +69,11 @@ static void _setValueMatrice(int valPeg[][11]) {
 }
 
 /**
- * pour des facilités de DEBUG sur la listMatrice (fichier serializé)
+ * @brief pour des facilités de DEBUG sur la listMatrice (fichier serializé)
  * appelé par g_slist_foreach(...)
+ * @param pm structure de matrice à afficher
+ * @param void
+ * @note provisoire
  */
 void printValue(pmatrice pm, void *p) {
   printf("\nFrom listMatrice\n");
@@ -70,9 +86,13 @@ void printValue(pmatrice pm, void *p) {
            pm->valPeg[i][10]);
   }
 }
+
 /**
- * enregistre la matrice dans une structure
+ * @brief enregistre la matrice dans une structure
  * conversion matrice.txt -> liste de structures de matrices
+ * @param name nom du type de matrice
+ * @param pointeur de fonction pour la methode de serialization de la structure
+ * matrice
  */
 static void _serializeMatrice(const char *name,
                               void (*pfSetMatrice)(int valPeg[][11])) {
@@ -101,12 +121,14 @@ static void _serializeMatrice(const char *name,
 }
 
 /**
- *
+ * @brief
+ * @note provisoire DEBUG today unused function Friday, December 3, 2021 4:05 PM
  */
 static int _getNumberMatrice() { return nb_matrice; }
 
 /**
- *
+ * @brief retourne le nom du type de matrice lu du fichier
+ * @return nom du type dela matrice
  */
 static char *_getNameMatrice() {
   char *name = "Unknown";
@@ -117,7 +139,9 @@ static char *_getNameMatrice() {
 }
 
 /**
- *
+ * @brief ouvre le fchier texte parametrage des matrices du jeu
+ * @return pointeur de fichier
+ * @todo passer le nom du fichier ne parametre
  */
 FILE *openFileMatrice() {
   fp = fopen("matrice.txt", "r");
@@ -127,7 +151,8 @@ FILE *openFileMatrice() {
 }
 
 /**
- *
+ * @brief algo de lecture du fichier pour sa serialization
+ * @return
  */
 void readFileMatrice() {
   void (*pf)();
@@ -147,7 +172,9 @@ void readFileMatrice() {
 }
 
 /**
+ * @brief
  * p est un tableau dynamique de char qui contient les noms des matrices
+ * appelé par getNameListMatrice
  */
 void getNameList(pmatrice pm, char **p) {
   static size_t i = 0;
@@ -156,8 +183,15 @@ void getNameList(pmatrice pm, char **p) {
 }
 
 /**
- *
- */
+ * @brief donne dans un tableau dynamique de char le nom de
+ * toutes les matrices
+ * @param index
+ * @todo passer en parametre un tableau pour les noms ou bien
+ * un @return de tableau
+ * @note nb_matrice est une variable globale et static et crée une dependance
+ * pour le tableau dynamique dont l'allocation memoire depends.
+ * Est-ce que l'allocation doit se faire dans cette fonction?
+  */
 void getNameListMatrice(int index) {
   char **p = (char **)malloc(sizeof(*p) * nb_matrice);
   if (p != NULL) {
@@ -169,11 +203,13 @@ void getNameListMatrice(int index) {
   } else
     exit(EXIT_FAILURE);
   g_slist_foreach(listMatrice, (GFunc)getNameList, p);
+  /* DEBUG */
   printf("\nDEBUG nom de la matrice index %d est %s\n", index, p[index - 1]);
 }
 
 /**
- *
+ * @brief  clos le fichier texte
+ * @return
  */
 void closeFileMatrice() {
   if (fp != NULL)
@@ -181,7 +217,7 @@ void closeFileMatrice() {
 }
 
 /**
- *
+ * @brief algo general pour faire tourner les fonctions et tester
  */
 int main(int argc, char const *argv[]) {
   if (openFileMatrice() != NULL) {

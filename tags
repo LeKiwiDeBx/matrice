@@ -7,12 +7,14 @@
 MATRICE	matrice.c	/^typedef struct MATRICE {$/;"	s	file:
 _getNameMatrice	matrice.c	/^static char *_getNameMatrice() {$/;"	f	file:
 _getNumberMatrice	matrice.c	/^static int _getNumberMatrice() { return nb_matrice; }$/;"	f	file:
-_serializeMatrice	matrice.c	/^static void _serializeMatrice(unsigned char id, char *name, int m[11][11]) {$/;"	f	file:
-_setValueMatrice	matrice.c	/^static void _setValueMatrice() {$/;"	f	file:
+_serializeMatrice	matrice.c	/^static void _serializeMatrice(const char *name,$/;"	f	file:
+_setValueMatrice	matrice.c	/^static void _setValueMatrice(int valPeg[][11]) {$/;"	f	file:
 bound	matrice.c	/^static char nmatrice[255], bound[10];$/;"	v	file:
 closeFileMatrice	matrice.c	/^void closeFileMatrice() {$/;"	f
-currentMatrice	matrice.c	/^s_matrice currentMatrice;$/;"	v
 fp	matrice.c	/^static FILE *fp = NULL;$/;"	v	file:
+getMatriceList	matrice.c	/^gpointer getMatriceList(guint index, int m[11][11]) {$/;"	f
+getNameList	matrice.c	/^void getNameList(pmatrice pm, char **p) {$/;"	f
+getNameListMatrice	matrice.c	/^void getNameListMatrice(int index) {$/;"	f
 id	matrice.c	/^  unsigned char id;$/;"	m	struct:MATRICE	file:
 listMatrice	matrice.c	/^GSList *listMatrice = NULL;$/;"	v
 main	matrice.c	/^int main(int argc, char const *argv[]) {$/;"	f
@@ -20,8 +22,9 @@ name	matrice.c	/^  char *name;$/;"	m	struct:MATRICE	file:
 nb_matrice	matrice.c	/^static int nb_matrice = 0;$/;"	v	file:
 nmatrice	matrice.c	/^static char nmatrice[255], bound[10];$/;"	v	file:
 openFileMatrice	matrice.c	/^FILE *openFileMatrice() {$/;"	f
+pcurrentMatrice	matrice.c	/^pmatrice pcurrentMatrice;$/;"	v
 pmatrice	matrice.c	/^typedef s_matrice *pmatrice;$/;"	t	file:
+printValue	matrice.c	/^void printValue(pmatrice pm, void *p) {$/;"	f
 readFileMatrice	matrice.c	/^void readFileMatrice() {$/;"	f
 s_matrice	matrice.c	/^} s_matrice;$/;"	t	typeref:struct:MATRICE	file:
-val	matrice.c	/^static int val[11] = {0};$/;"	v	file:
 valPeg	matrice.c	/^  int valPeg[11][11];$/;"	m	struct:MATRICE	file:
