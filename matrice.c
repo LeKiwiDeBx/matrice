@@ -1,9 +1,9 @@
 /**
-* @author LeKiwiDeBx (c) [°}<couak!>
-* Friday, December 3, 2021 7:20 PM
-* @version alpha 0.1
-* @license GNU GPL v3 License
-*/
+ * @author LeKiwiDeBx (c) [°}<couak!>
+ * Friday, December 3, 2021 7:20 PM
+ * @version alpha 0.1
+ * @license GNU GPL v3 License
+ */
 #include <glib.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,22 +28,22 @@ static char *_getNameMatrice();
 static void _setValueMatrice(int[][11]);
 static void _serializeMatrice(const char *name, void (*pf)(int[][11]));
 
-static FILE *openFileMatrice();
+static FILE *openFileMatrice(const char *filename);
 static void readFileMatrice();
 static void closeFileMatrice();
 
 // function de GSList
 void printValue(pmatrice, void *);
 void getNameList(pmatrice, char **);
-void getNameListMatrice(int);
+void getNameListMatrice(int, char **);
 gpointer getMatriceList(guint, int[11][11]);
 
 /**
-* @brief recupere la matrice nieme de la GList (matrice)
-* @param index numero de la matrice
-* @param m[][] tableau pour les valeurs de la matrice choisie
-* @return la structure de la matrice nieme (index)
-*/
+ * @brief recupere la matrice nieme de la GList (matrice)
+ * @param index numero de la matrice
+ * @param m[][] tableau pour les valeurs de la matrice choisie
+ * @return la structure de la matrice nieme (index)
+ */
 gpointer getMatriceList(guint index, int m[11][11]) {
   pmatrice pm = g_slist_nth_data(listMatrice, index - 1);
   for (size_t i = 0; i < 11; i++) {
@@ -124,7 +124,9 @@ static void _serializeMatrice(const char *name,
  * @brief
  * @note provisoire DEBUG today unused function Friday, December 3, 2021 4:05 PM
  */
-static int _getNumberMatrice() { return nb_matrice; }
+static int _getNumberMatrice(){
+  return nb_matrice;
+}
 
 /**
  * @brief retourne le nom du type de matrice lu du fichier
@@ -139,13 +141,13 @@ static char *_getNameMatrice() {
 }
 
 /**
- * @brief ouvre le fchier texte parametrage des matrices du jeu
+ * @brief ouvre le fichier texte parametrage des matrices du jeu
  * @return pointeur de fichier
  * @todo passer le nom du fichier ne parametre
  */
-FILE *openFileMatrice() {
-  fp = fopen("matrice.txt", "r");
-  printf("%s\n", "\n\n\n\nProgramme de Lecture Fichier Matrice.txt\n");
+FILE *openFileMatrice(const char * nf) {
+  fp = fopen(nf, "r");
+  printf("\n\n\nProgramme de Lecture Fichier %sn", nf);
   rewind(fp);
   return (fp);
 }
@@ -186,22 +188,15 @@ void getNameList(pmatrice pm, char **p) {
  * @brief donne dans un tableau dynamique de char le nom de
  * toutes les matrices
  * @param index
- * @todo passer en parametre un tableau pour les noms ou bien
- * un @return de tableau
- * @note nb_matrice est une variable globale et static et crée une dependance
- * pour le tableau dynamique dont l'allocation memoire depends.
- * Est-ce que l'allocation doit se faire dans cette fonction?
-  */
-void getNameListMatrice(int index) {
-  char **p = (char **)malloc(sizeof(*p) * nb_matrice);
-  if (p != NULL) {
-    for (int i = 0; i < nb_matrice; i++) {
-      p[i] = (char *)malloc(sizeof(**p) * 255);
-      if (p[i] == NULL)
-        exit(EXIT_FAILURE);
-    }
-  } else
-    exit(EXIT_FAILURE);
+ * @todo
+ * [X] passer en parametre un tableau pour les noms ou bien
+ *     un @return de tableau PASSAGE TABLEAU DE CHAR**
+ * @note
+ * [X] nb_matrice est une variable globale et static et crée une dependance
+ *     pour le tableau dynamique dont l'allocation memoire depends.
+ *     Est-ce que l'allocation doit se faire dans cette fonction? NON
+ */
+void getNameListMatrice(int index, char **p) {
   g_slist_foreach(listMatrice, (GFunc)getNameList, p);
   /* DEBUG */
   printf("\nDEBUG nom de la matrice index %d est %s\n", index, p[index - 1]);
@@ -220,20 +215,31 @@ void closeFileMatrice() {
  * @brief algo general pour faire tourner les fonctions et tester
  */
 int main(int argc, char const *argv[]) {
-  if (openFileMatrice() != NULL) {
+  const char * nf = "matrice.txt";
+  if (openFileMatrice(nf) != NULL) {
     readFileMatrice();
     closeFileMatrice();
   }
   // on travaille sur la GSList (fichier serializé)
   int index = 1; // DEBUG
-  getNameListMatrice(index);
+  int n = _getNumberMatrice();
+  char **p = (char **)malloc(sizeof(*p) * n);
+  if (p != NULL) {
+    for (int i = 0; i < n; i++) {
+      p[i] = (char *)malloc(sizeof(**p) * 255);
+      if (p[i] == NULL)
+        exit(EXIT_FAILURE);
+    }
+  } else
+    exit(EXIT_FAILURE);
+  getNameListMatrice(index, p);
   /*
    * 1: english 2: german
    * zone test
    **/
   int m[11][11];
   pcurrentMatrice = getMatriceList(index, m);
-  printf("\nNom de la matrice courante %s\n", pcurrentMatrice->name);
+  printf("\nDEBUG:: Nom de la matrice courante %s\n", pcurrentMatrice->name);
   for (size_t i = 0; i < 11; i++) {
     for (size_t j = 0; j < 11; j++) {
       printf("%d ", m[i][j]);

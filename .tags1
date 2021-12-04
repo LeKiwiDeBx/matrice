@@ -25,6 +25,6 @@ _getNameMatrice	/home/jean/src/matrice/matrice.c	/^static char *_getNameMatrice(
 openFileMatrice	/home/jean/src/matrice/matrice.c	/^FILE *openFileMatrice() {$/;"	function	line:146
 readFileMatrice	/home/jean/src/matrice/matrice.c	/^void readFileMatrice() {$/;"	function	line:157
 getNameList	/home/jean/src/matrice/matrice.c	/^void getNameList(pmatrice pm, char **p) {$/;"	function	line:179	signature:(pmatrice pm, char **p)
-getNameListMatrice	/home/jean/src/matrice/matrice.c	/^void getNameListMatrice(int index) {$/;"	function	line:195	signature:(int index)
-closeFileMatrice	/home/jean/src/matrice/matrice.c	/^void closeFileMatrice() {$/;"	function	line:214
-main	/home/jean/src/matrice/matrice.c	/^int main(int argc, char const *argv[]) {$/;"	function	line:222	signature:(int argc, char const *argv[])
+getNameListMatrice	/home/jean/src/matrice/matrice.c	/^void getNameListMatrice(int index, char **p) {$/;"	function	line:195	signature:(int index, char **p)
+closeFileMatrice	/home/jean/src/matrice/matrice.c	/^void closeFileMatrice() {$/;"	function	line:205
+main	/home/jean/src/matrice/matrice.c	/^int main(int argc, char const *argv[]) {$/;"	function	line:213	signature:(int argc, char const *argv[])
