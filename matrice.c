@@ -1,9 +1,11 @@
+
 /**
  * @author LeKiwiDeBx (c) [°}<couak!>
  * Friday, December 3, 2021 7:20 PM
  * @version alpha 0.1
  * @license GNU GPL v3 License
  */
+
 #include <glib.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -35,7 +37,7 @@ static void closeFileMatrice();
 // function de GSList
 void printValue(pmatrice, void *);
 void getNameList(pmatrice, char **);
-void getNameListMatrice(int, char **);
+char *getNameListMatrice(const unsigned int, char **);
 gpointer getMatriceList(guint, int[11][11]);
 
 /**
@@ -124,9 +126,7 @@ static void _serializeMatrice(const char *name,
  * @brief
  * @note provisoire DEBUG today unused function Friday, December 3, 2021 4:05 PM
  */
-static int _getNumberMatrice(){
-  return nb_matrice;
-}
+static int _getNumberMatrice() { return nb_matrice; }
 
 /**
  * @brief retourne le nom du type de matrice lu du fichier
@@ -145,7 +145,7 @@ static char *_getNameMatrice() {
  * @return pointeur de fichier
  * @todo passer le nom du fichier ne parametre
  */
-FILE *openFileMatrice(const char * nf) {
+FILE *openFileMatrice(const char *nf) {
   fp = fopen(nf, "r");
   printf("\n\n\nProgramme de Lecture Fichier %sn", nf);
   rewind(fp);
@@ -196,10 +196,12 @@ void getNameList(pmatrice pm, char **p) {
  *     pour le tableau dynamique dont l'allocation memoire depends.
  *     Est-ce que l'allocation doit se faire dans cette fonction? NON
  */
-void getNameListMatrice(int index, char **p) {
+char *getNameListMatrice(const unsigned int index, char **p) {
   g_slist_foreach(listMatrice, (GFunc)getNameList, p);
   /* DEBUG */
   printf("\nDEBUG nom de la matrice index %d est %s\n", index, p[index - 1]);
+  /* FIN DEBUG */
+  return (index > 0 && index <= nb_matrice) ? p[index - 1] : NULL;
 }
 
 /**
@@ -215,7 +217,7 @@ void closeFileMatrice() {
  * @brief algo general pour faire tourner les fonctions et tester
  */
 int main(int argc, char const *argv[]) {
-  const char * nf = "matrice.txt";
+  const char *nf = "matrice.txt";
   if (openFileMatrice(nf) != NULL) {
     readFileMatrice();
     closeFileMatrice();

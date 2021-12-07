@@ -1,5 +1,5 @@
 {
-  "execPath": "/usr/bin/gcc",
+  "execPath": "gcc",
   "gccDefaultCFlags": "-Wall -std=c11",
   "gccDefaultCppFlags": "-Wall -std=c++11",
   "gccErrorLimit": 15,

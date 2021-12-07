@@ -22,9 +22,9 @@ printValue	/home/jean/src/matrice/matrice.c	/^void printValue(pmatrice pm, void 
 _serializeMatrice	/home/jean/src/matrice/matrice.c	/^static void _serializeMatrice(const char *name,$/;"	function	line:97	file:	signature:(const char *name, void (*pfSetMatrice)(int valPeg[][11]))
 _getNumberMatrice	/home/jean/src/matrice/matrice.c	/^static int _getNumberMatrice() { return nb_matrice; }$/;"	function	line:127	file:
 _getNameMatrice	/home/jean/src/matrice/matrice.c	/^static char *_getNameMatrice() {$/;"	function	line:133	file:
-openFileMatrice	/home/jean/src/matrice/matrice.c	/^FILE *openFileMatrice() {$/;"	function	line:146
+openFileMatrice	/home/jean/src/matrice/matrice.c	/^FILE *openFileMatrice(const char *nf) {$/;"	function	line:146	signature:(const char *nf)
 readFileMatrice	/home/jean/src/matrice/matrice.c	/^void readFileMatrice() {$/;"	function	line:157
 getNameList	/home/jean/src/matrice/matrice.c	/^void getNameList(pmatrice pm, char **p) {$/;"	function	line:179	signature:(pmatrice pm, char **p)
-getNameListMatrice	/home/jean/src/matrice/matrice.c	/^void getNameListMatrice(int index, char **p) {$/;"	function	line:195	signature:(int index, char **p)
-closeFileMatrice	/home/jean/src/matrice/matrice.c	/^void closeFileMatrice() {$/;"	function	line:205
-main	/home/jean/src/matrice/matrice.c	/^int main(int argc, char const *argv[]) {$/;"	function	line:213	signature:(int argc, char const *argv[])
+getNameListMatrice	/home/jean/src/matrice/matrice.c	/^char *getNameListMatrice(const unsigned int index, char **p) {$/;"	function	line:197	signature:(const unsigned int index, char **p)
+closeFileMatrice	/home/jean/src/matrice/matrice.c	/^void closeFileMatrice() {$/;"	function	line:212
+main	/home/jean/src/matrice/matrice.c	/^int main(int argc, char const *argv[]) {$/;"	function	line:220	signature:(int argc, char const *argv[])
