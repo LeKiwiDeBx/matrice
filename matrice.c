@@ -5,40 +5,27 @@
  * @version alpha 0.1
  * @license GNU GPL v3 License
  */
-
+#include "matrice.h"
 #include <glib.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 static FILE *fp = NULL;
-static int nb_matrice = 0;
+static unsigned int nb_matrice = 0;
 static char nmatrice[255], bound[10];
 
 GSList *listMatrice = NULL;
 
-typedef struct MATRICE {
-  unsigned char id;
-  char *name;
-  int valPeg[11][11];
-} s_matrice;
-
-typedef s_matrice *pmatrice;
 pmatrice pcurrentMatrice;
 
 static int _getNumberMatrice();
 static char *_getNameMatrice();
-static void _setValueMatrice(int[][11]);
-static void _serializeMatrice(const char *name, void (*pf)(int[][11]));
+static void _setValueMatrice(int[][VER_MAX]);
+static void _serializeMatrice(const char *name, void (*pf)(int[][VER_MAX]));
 
 static FILE *openFileMatrice(const char *filename);
 static void readFileMatrice();
 static void closeFileMatrice();
-
-// function de GSList
-void printValue(pmatrice, void *);
-void getNameList(pmatrice, char **);
-char *getNameListMatrice(const unsigned int, char **);
-gpointer getMatriceList(guint, int[11][11]);
 
 /**
  * @brief recupere la matrice nieme de la GList (matrice)
@@ -46,10 +33,10 @@ gpointer getMatriceList(guint, int[11][11]);
  * @param m[][] tableau pour les valeurs de la matrice choisie
  * @return la structure de la matrice nieme (index)
  */
-gpointer getMatriceList(guint index, int m[11][11]) {
+void *getMatriceList(unsigned int index, int m[HOR_MAX][VER_MAX]) {
   pmatrice pm = g_slist_nth_data(listMatrice, index - 1);
-  for (size_t i = 0; i < 11; i++) {
-    for (size_t j = 0; j < 11; j++) {
+  for (size_t i = 0; i < HOR_MAX; i++) {
+    for (size_t j = 0; j < VER_MAX; j++) {
       m[i][j] = pm->valPeg[i][j];
     }
   }
@@ -61,8 +48,8 @@ gpointer getMatriceList(guint index, int m[11][11]) {
  * @param valPeg[][] tableau de la matrice à serializer
  * @return
  */
-static void _setValueMatrice(int valPeg[][11]) {
-  for (size_t i = 0; i < 11; i++) {
+static void _setValueMatrice(int valPeg[][VER_MAX]) {
+  for (size_t i = 0; i < HOR_MAX; i++) {
     fscanf(fp, "%d %d %d %d %d %d %d %d %d %d %d", &valPeg[i][0], &valPeg[i][1],
            &valPeg[i][2], &valPeg[i][3], &valPeg[i][4], &valPeg[i][5],
            &valPeg[i][6], &valPeg[i][7], &valPeg[i][8], &valPeg[i][9],
@@ -80,7 +67,7 @@ static void _setValueMatrice(int valPeg[][11]) {
 void printValue(pmatrice pm, void *p) {
   printf("\nFrom listMatrice\n");
   printf("\n_serialize : name %s indice %d\n", pm->name, pm->id);
-  for (size_t i = 0; i < 11; i++) {
+  for (size_t i = 0; i < HOR_MAX; i++) {
     printf("%2d %2d %2d %2d %2d %2d %2d %2d %2d %2d %2d\n", pm->valPeg[i][0],
            pm->valPeg[i][1], pm->valPeg[i][2], pm->valPeg[i][3],
            pm->valPeg[i][4], pm->valPeg[i][5], pm->valPeg[i][6],
@@ -97,7 +84,7 @@ void printValue(pmatrice pm, void *p) {
  * matrice
  */
 static void _serializeMatrice(const char *name,
-                              void (*pfSetMatrice)(int valPeg[][11])) {
+                              void (*pfSetMatrice)(int valPeg[][VER_MAX])) {
   static unsigned char index = 1;
   pmatrice pm = g_new(s_matrice, 1);
   pm->id = index++;
@@ -105,7 +92,7 @@ static void _serializeMatrice(const char *name,
   pfSetMatrice(pm->valPeg);
   listMatrice = g_slist_append(listMatrice, pm);
   // DEBUG
-  g_slist_foreach(listMatrice, (GFunc)printValue, NULL);
+  //g_slist_foreach(listMatrice, (GFunc)printValue, NULL);
 
   // remplir un tableau de pointeur de structures
   // IDEES GENERALES
@@ -147,7 +134,7 @@ static char *_getNameMatrice() {
  */
 FILE *openFileMatrice(const char *nf) {
   fp = fopen(nf, "r");
-  printf("\n\n\nProgramme de Lecture Fichier %sn", nf);
+  printf("\n\n\nProgramme de Lecture Fichier %s\n", nf);
   rewind(fp);
   return (fp);
 }
@@ -239,11 +226,11 @@ int main(int argc, char const *argv[]) {
    * 1: english 2: german
    * zone test
    **/
-  int m[11][11];
+  int m[HOR_MAX][VER_MAX];
   pcurrentMatrice = getMatriceList(index, m);
   printf("\nDEBUG:: Nom de la matrice courante %s\n", pcurrentMatrice->name);
-  for (size_t i = 0; i < 11; i++) {
-    for (size_t j = 0; j < 11; j++) {
+  for (size_t i = 0; i < HOR_MAX; i++) {
+    for (size_t j = 0; j < VER_MAX; j++) {
       printf("%d ", m[i][j]);
     }
     printf("\n");

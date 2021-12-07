@@ -4,27 +4,21 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-fp	/home/jean/src/matrice/matrice.c	/^static FILE *fp = NULL;$/;"	variable	line:11	file:
-nb_matrice	/home/jean/src/matrice/matrice.c	/^static int nb_matrice = 0;$/;"	variable	line:12	file:
-nmatrice	/home/jean/src/matrice/matrice.c	/^static char nmatrice[255], bound[10];$/;"	variable	line:13	file:
-bound	/home/jean/src/matrice/matrice.c	/^static char nmatrice[255], bound[10];$/;"	variable	line:13	file:
-listMatrice	/home/jean/src/matrice/matrice.c	/^GSList *listMatrice = NULL;$/;"	variable	line:15
-MATRICE	/home/jean/src/matrice/matrice.c	/^typedef struct MATRICE {$/;"	struct	line:17	file:
-id	/home/jean/src/matrice/matrice.c	/^  unsigned char id;$/;"	member	line:18	struct:MATRICE	file:
-name	/home/jean/src/matrice/matrice.c	/^  char *name;$/;"	member	line:19	struct:MATRICE	file:
-valPeg	/home/jean/src/matrice/matrice.c	/^  int valPeg[11][11];$/;"	member	line:20	struct:MATRICE	file:
-s_matrice	/home/jean/src/matrice/matrice.c	/^} s_matrice;$/;"	typedef	line:21	typeref:struct:MATRICE	file:
-pmatrice	/home/jean/src/matrice/matrice.c	/^typedef s_matrice *pmatrice;$/;"	typedef	line:23	file:
-pcurrentMatrice	/home/jean/src/matrice/matrice.c	/^pmatrice pcurrentMatrice;$/;"	variable	line:24
-getMatriceList	/home/jean/src/matrice/matrice.c	/^gpointer getMatriceList(guint index, int m[11][11]) {$/;"	function	line:47	signature:(guint index, int m[11][11])
-_setValueMatrice	/home/jean/src/matrice/matrice.c	/^static void _setValueMatrice(int valPeg[][11]) {$/;"	function	line:62	file:	signature:(int valPeg[][11])
-printValue	/home/jean/src/matrice/matrice.c	/^void printValue(pmatrice pm, void *p) {$/;"	function	line:78	signature:(pmatrice pm, void *p)
-_serializeMatrice	/home/jean/src/matrice/matrice.c	/^static void _serializeMatrice(const char *name,$/;"	function	line:97	file:	signature:(const char *name, void (*pfSetMatrice)(int valPeg[][11]))
-_getNumberMatrice	/home/jean/src/matrice/matrice.c	/^static int _getNumberMatrice() { return nb_matrice; }$/;"	function	line:127	file:
-_getNameMatrice	/home/jean/src/matrice/matrice.c	/^static char *_getNameMatrice() {$/;"	function	line:133	file:
-openFileMatrice	/home/jean/src/matrice/matrice.c	/^FILE *openFileMatrice(const char *nf) {$/;"	function	line:146	signature:(const char *nf)
-readFileMatrice	/home/jean/src/matrice/matrice.c	/^void readFileMatrice() {$/;"	function	line:157
-getNameList	/home/jean/src/matrice/matrice.c	/^void getNameList(pmatrice pm, char **p) {$/;"	function	line:179	signature:(pmatrice pm, char **p)
-getNameListMatrice	/home/jean/src/matrice/matrice.c	/^char *getNameListMatrice(const unsigned int index, char **p) {$/;"	function	line:197	signature:(const unsigned int index, char **p)
-closeFileMatrice	/home/jean/src/matrice/matrice.c	/^void closeFileMatrice() {$/;"	function	line:212
-main	/home/jean/src/matrice/matrice.c	/^int main(int argc, char const *argv[]) {$/;"	function	line:220	signature:(int argc, char const *argv[])
+fp	/home/jean/src/matrice/matrice.c	/^static FILE *fp = NULL;$/;"	variable	line:13	file:
+nb_matrice	/home/jean/src/matrice/matrice.c	/^static unsigned int nb_matrice = 0;$/;"	variable	line:14	file:
+nmatrice	/home/jean/src/matrice/matrice.c	/^static char nmatrice[255], bound[10];$/;"	variable	line:15	file:
+bound	/home/jean/src/matrice/matrice.c	/^static char nmatrice[255], bound[10];$/;"	variable	line:15	file:
+listMatrice	/home/jean/src/matrice/matrice.c	/^GSList *listMatrice = NULL;$/;"	variable	line:17
+pcurrentMatrice	/home/jean/src/matrice/matrice.c	/^pmatrice pcurrentMatrice;$/;"	variable	line:19
+getMatriceList	/home/jean/src/matrice/matrice.c	/^void *getMatriceList(unsigned int index, int m[HOR_MAX][VER_MAX]) {$/;"	function	line:36	signature:(unsigned int index, int m[HOR_MAX][VER_MAX])
+_setValueMatrice	/home/jean/src/matrice/matrice.c	/^static void _setValueMatrice(int valPeg[][VER_MAX]) {$/;"	function	line:51	file:	signature:(int valPeg[][VER_MAX])
+printValue	/home/jean/src/matrice/matrice.c	/^void printValue(pmatrice pm, void *p) {$/;"	function	line:67	signature:(pmatrice pm, void *p)
+_serializeMatrice	/home/jean/src/matrice/matrice.c	/^static void _serializeMatrice(const char *name,$/;"	function	line:86	file:	signature:(const char *name, void (*pfSetMatrice)(int valPeg[][VER_MAX]))
+_getNumberMatrice	/home/jean/src/matrice/matrice.c	/^static int _getNumberMatrice() { return nb_matrice; }$/;"	function	line:116	file:
+_getNameMatrice	/home/jean/src/matrice/matrice.c	/^static char *_getNameMatrice() {$/;"	function	line:122	file:
+openFileMatrice	/home/jean/src/matrice/matrice.c	/^FILE *openFileMatrice(const char *nf) {$/;"	function	line:135	signature:(const char *nf)
+readFileMatrice	/home/jean/src/matrice/matrice.c	/^void readFileMatrice() {$/;"	function	line:146
+getNameList	/home/jean/src/matrice/matrice.c	/^void getNameList(pmatrice pm, char **p) {$/;"	function	line:168	signature:(pmatrice pm, char **p)
+getNameListMatrice	/home/jean/src/matrice/matrice.c	/^char *getNameListMatrice(const unsigned int index, char **p) {$/;"	function	line:186	signature:(const unsigned int index, char **p)
+closeFileMatrice	/home/jean/src/matrice/matrice.c	/^void closeFileMatrice() {$/;"	function	line:198
+main	/home/jean/src/matrice/matrice.c	/^int main(int argc, char const *argv[]) {$/;"	function	line:206	signature:(int argc, char const *argv[])
