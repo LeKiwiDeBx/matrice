@@ -92,7 +92,7 @@ static void _serializeMatrice(const char *name,
   pfSetMatrice(pm->valPeg);
   listMatrice = g_slist_append(listMatrice, pm);
   // DEBUG
-  //g_slist_foreach(listMatrice, (GFunc)printValue, NULL);
+  // g_slist_foreach(listMatrice, (GFunc)printValue, NULL);
 
   // remplir un tableau de pointeur de structures
   // IDEES GENERALES
