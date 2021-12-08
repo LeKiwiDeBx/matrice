@@ -4,6 +4,8 @@
 #define HOR_MAX 11 /* nb rows    */
 #define VER_MAX 11 /* nb columns */
 
+#define CALLBACK_MAT(pf) void (*pf)(int valPeg[][VER_MAX]))
+
 typedef struct MATRICE {
   unsigned char id;
   char *name;
@@ -12,6 +14,7 @@ typedef struct MATRICE {
 
 typedef s_matrice *pmatrice;
 
+typedef void (*FuncPtr)(); //  pointeur de function
 // function de GSList
 void printValue(pmatrice, void *);
 void getNameList(pmatrice, char **);

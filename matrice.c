@@ -1,15 +1,16 @@
-
 /**
  * @author LeKiwiDeBx (c) [°}<couak!>
  * Friday, December 3, 2021 7:20 PM
  * @version alpha 0.1
  * @license GNU GPL v3 License
  */
+
 #include "matrice.h"
 #include <glib.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 static FILE *fp = NULL;
 static unsigned int nb_matrice = 0;
 static char nmatrice[255], bound[10];
@@ -21,7 +22,8 @@ pmatrice pcurrentMatrice;
 static int _getNumberMatrice();
 static char *_getNameMatrice();
 static void _setValueMatrice(int[][VER_MAX]);
-static void _serializeMatrice(const char *name, void (*pf)(int[][VER_MAX]));
+// static void _serializeMatrice(const char *name, void (*pf)(int[][VER_MAX]));
+static void _serializeMatrice(const char *name, FuncPtr pf);
 
 static FILE *openFileMatrice(const char *filename);
 static void readFileMatrice();
@@ -82,9 +84,9 @@ void printValue(pmatrice pm, void *p) {
  * @param name nom du type de matrice
  * @param pointeur de fonction pour la methode de serialization de la structure
  * matrice
+ * void (*pfSetMatrice)(int valPeg[][VER_MAX])
  */
-static void _serializeMatrice(const char *name,
-                              void (*pfSetMatrice)(int valPeg[][VER_MAX])) {
+static void _serializeMatrice(const char *name, CALLBACK_MAT(pfSetMatrice) {
   static unsigned char index = 1;
   pmatrice pm = g_new(s_matrice, 1);
   pm->id = index++;
@@ -113,7 +115,8 @@ static void _serializeMatrice(const char *name,
  * @brief
  * @note provisoire DEBUG today unused function Friday, December 3, 2021 4:05 PM
  */
-static int _getNumberMatrice() { return nb_matrice; }
+static int _getNumberMatrice() {
+  return nb_matrice; }
 
 /**
  * @brief retourne le nom du type de matrice lu du fichier
@@ -144,7 +147,7 @@ FILE *openFileMatrice(const char *nf) {
  * @return
  */
 void readFileMatrice() {
-  void (*pf)();
+  FuncPtr pf;
   while (!feof(fp)) {
     fscanf(fp, "%s", bound); // read current lines
     if (strstr(bound, "#"))  //# except for comment
