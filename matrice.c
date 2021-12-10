@@ -212,6 +212,20 @@ int main(int argc, char const *argv[]) {
     readFileMatrice();
     closeFileMatrice();
   }
+  // DRAFT SIMULATION DE LA METHODE matrixLoad(int choice) de matrix.c
+      // int choice = 0;
+      // int m[HOR_MAX][VER_MAX];
+      // if(choice >= 0 && choice < nb_matrice){
+        // int index = choice + 1;
+        // currentMatrixOfBoard.pShape = getMatriceList(index, m);
+        // currentMatrixOfBoard.name = getNameListMatrice(index,p);
+        // currentMatrixOfBoard.id = choice;
+        // memcpy(matrixCopy, currentMatrixOfBoard.pShape, HOR_MAX * VER_MAX * sizeof(char)) ;
+        // pMatrixLoad = matrixCopy;
+        // return 1;
+      //} else {return EXIT_FAILURE ;}
+
+
   // on travaille sur la GSList (fichier serializé)
   int index = 1; // DEBUG
   int n = _getNumberMatrice();
