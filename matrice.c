@@ -4,6 +4,7 @@
  * @version alpha 0.1
  * @license GNU GPL v3 License
  */
+#include <assert.h>
 
 #include "matrice.h"
 #include <glib.h>
@@ -213,21 +214,37 @@ int main(int argc, char const *argv[]) {
     closeFileMatrice();
   }
   // DRAFT SIMULATION DE LA METHODE matrixLoad(int choice) de matrix.c
-      // int choice = 0;
-      // int m[HOR_MAX][VER_MAX];
-      // if(choice >= 0 && choice < nb_matrice){
-        // int index = choice + 1;
-        // currentMatrixOfBoard.pShape = getMatriceList(index, m);
-        // currentMatrixOfBoard.name = getNameListMatrice(index,p);
-        // currentMatrixOfBoard.id = choice;
-        // memcpy(matrixCopy, currentMatrixOfBoard.pShape, HOR_MAX * VER_MAX * sizeof(char)) ;
-        // pMatrixLoad = matrixCopy;
-        // return 1;
-      //} else {return EXIT_FAILURE ;}
-
+  // --------------------------------  VARIANTS  -------------------------
+  // int choice = 0;
+  // int m[HOR_MAX][VER_MAX];
+  // typedef char Matrix[HOR_MAX][VER_MAX];
+  // typedef struct s_matrixOfBoard {
+  //     int id;
+  //     char *name;
+  //     Matrix *pShape;
+  // } matrixOfBoard;
+  // matrixOfBoard currentMatrixOfBoard;
+  // Matrix matrixCopy, pMatrixLoad;
+  // --------------------------------- FUNCTION  -------------------------
+  // if(choice >= 0 && choice < nb_matrice){
+  // int index = choice + 1;
+  // pcurrentMatrice = getMatriceList(index, m) ;
+  // currentMatrixOfBoard.pShape = pcurrentMatrice->valPeg;
+  // currentMatrixOfBoard.name = getNameListMatrice(index,p);
+  // currentMatrixOfBoard.id = choice;
+  // memcpy(matrixCopy, currentMatrixOfBoard.pShape, HOR_MAX * VER_MAX *
+  // sizeof(char)) ;
+  // pMatrixLoad = matrixCopy;
+  // -------------------------------  GARBAGE  ----------------------------
+  // return 1;
+  //} else {
+  // return EXIT_FAILURE ;
+  // }
+  // ------------------------------ EOF GHOST FUNCTION --------------------
 
   // on travaille sur la GSList (fichier serializé)
   int index = 1; // DEBUG
+  assert(index == 1);
   int n = _getNumberMatrice();
   char **p = (char **)malloc(sizeof(*p) * n);
   if (p != NULL) {
