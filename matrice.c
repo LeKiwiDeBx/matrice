@@ -225,13 +225,13 @@ int main(int argc, char const *argv[]) {
     Matrix *pShape;
   } matrixOfBoard;
   matrixOfBoard currentMatrixOfBoard;
-  char ( * pMatrixLoad)[VER_MAX];
+  char(*pMatrixLoad)[VER_MAX];
   Matrix matrixCopy;
   int n = _getNumberMatrice();
   char **p = (char **)malloc(sizeof(*p) * n);
   if (p != NULL) {
     for (int i = 0; i < n; i++) {
-      p[i] = (char *)malloc(sizeof(**p) ); //*255
+      p[i] = malloc(255 * sizeof(**p));
       if (p[i] == NULL)
         exit(EXIT_FAILURE);
     }
@@ -274,7 +274,8 @@ int main(int argc, char const *argv[]) {
     printf("\n");
   }
   printf("\nNom des matrices :");
-  for(size_t i = 0; i < nb_matrice; printf("\n%s",p[i]), i++);
+  for (size_t i = 0; i < nb_matrice; printf("\n%s", p[i]), i++)
+    ;
   // ======================================================================
 
   // on travaille sur la GSList (fichier serializé)
