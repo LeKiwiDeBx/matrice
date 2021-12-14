@@ -214,60 +214,95 @@ int main(int argc, char const *argv[]) {
     closeFileMatrice();
   }
   // DRAFT SIMULATION DE LA METHODE matrixLoad(int choice) de matrix.c
-  // --------------------------------  VARIANTS  -------------------------
-  // int choice = 0;
-  // int m[HOR_MAX][VER_MAX];
-  // typedef char Matrix[HOR_MAX][VER_MAX];
-  // typedef struct s_matrixOfBoard {
-  //     int id;
-  //     char *name;
-  //     Matrix *pShape;
-  // } matrixOfBoard;
-  // matrixOfBoard currentMatrixOfBoard;
-  // Matrix matrixCopy, pMatrixLoad;
-  // --------------------------------- FUNCTION  -------------------------
-  // if(choice >= 0 && choice < nb_matrice){
-  // int index = choice + 1;
-  // pcurrentMatrice = getMatriceList(index, m) ;
-  // currentMatrixOfBoard.pShape = pcurrentMatrice->valPeg;
-  // currentMatrixOfBoard.name = getNameListMatrice(index,p);
-  // currentMatrixOfBoard.id = choice;
-  // memcpy(matrixCopy, currentMatrixOfBoard.pShape, HOR_MAX * VER_MAX *
-  // sizeof(char)) ;
-  // pMatrixLoad = matrixCopy;
-  // -------------------------------  GARBAGE  ----------------------------
-  // return 1;
-  //} else {
-  // return EXIT_FAILURE ;
-  // }
-  // ------------------------------ EOF GHOST FUNCTION --------------------
-
-  // on travaille sur la GSList (fichier serializé)
-  int index = 1; // DEBUG
-  assert(index == 1);
+  // --------------------------------  INVARIANTS  -------------------------
+  int choice = 1;
+  int index = choice + 1;
+  int m[HOR_MAX][VER_MAX];
+  typedef char Matrix[HOR_MAX][VER_MAX];
+  typedef struct s_matrixOfBoard {
+    int id;
+    char *name;
+    Matrix *pShape;
+  } matrixOfBoard;
+  matrixOfBoard currentMatrixOfBoard;
+  char ( * pMatrixLoad)[VER_MAX];
+  Matrix matrixCopy;
   int n = _getNumberMatrice();
   char **p = (char **)malloc(sizeof(*p) * n);
   if (p != NULL) {
     for (int i = 0; i < n; i++) {
-      p[i] = (char *)malloc(sizeof(**p) * 255);
+      p[i] = (char *)malloc(sizeof(**p) ); //*255
       if (p[i] == NULL)
         exit(EXIT_FAILURE);
     }
   } else
     exit(EXIT_FAILURE);
-  getNameListMatrice(index, p);
-  /*
-   * 1: english 2: german
-   * zone test
-   **/
-  int m[HOR_MAX][VER_MAX];
-  pcurrentMatrice = getMatriceList(index, m);
-  printf("\nDEBUG:: Nom de la matrice courante %s\n", pcurrentMatrice->name);
+  //
+  // --------------------------------- GHOST FUNCTION  --------------------
+  if (choice >= 0 && choice < nb_matrice) {
+    pcurrentMatrice = getMatriceList(index, m);
+    currentMatrixOfBoard.pShape = (Matrix *)pcurrentMatrice->valPeg;
+    currentMatrixOfBoard.name = getNameListMatrice(index, p);
+    currentMatrixOfBoard.id = choice;
+    memcpy(matrixCopy, currentMatrixOfBoard.pShape,
+           HOR_MAX * VER_MAX * sizeof(char));
+    pMatrixLoad = matrixCopy;
+    // -------------------------------  GARBAGE  ----------------------------
+
+  } else {
+    return EXIT_FAILURE;
+  }
+  // ------------------------------ EOF GHOST FUNCTION --------------------
+
+  // ------------------------------ TEST INVARIANTS -----------------------
+  assert(!strcmp(currentMatrixOfBoard.name, "German"));
+  printf("SUCESS Current matrix name\n");
+  printf("\nDEBUG INVARIANTS : Nom de la matrice courante %s\n",
+         currentMatrixOfBoard.name);
+  assert(choice == 1);
+  printf("SUCESS choice\n");
+  assert(currentMatrixOfBoard.id == 1);
+  printf("SUCESS id\n");
+  printf("\nDEBUG INVARIANTS : Numéro identifiant de la matrice courante %d\n",
+         currentMatrixOfBoard.id);
+  assert(m[0][0] == -8); /* -8 tag for the german's shape */
+  printf("SUCESS tag\n");
   for (size_t i = 0; i < HOR_MAX; i++) {
     for (size_t j = 0; j < VER_MAX; j++) {
       printf("%d ", m[i][j]);
     }
     printf("\n");
   }
+  printf("\nNom des matrices :");
+  for(size_t i = 0; i < nb_matrice; printf("\n%s",p[i]), i++);
+  // ======================================================================
+
+  // on travaille sur la GSList (fichier serializé)
+  // int index = 1; // DEBUG
+  // assert(index == 1);
+  // int n = _getNumberMatrice();
+  // char **p = (char **)malloc(sizeof(*p) * n);
+  // if (p != NULL) {
+  //   for (int i = 0; i < n; i++) {
+  //     p[i] = (char *)malloc(sizeof(**p) * 255);
+  //     if (p[i] == NULL)
+  //       exit(EXIT_FAILURE);
+  //   }
+  // } else
+  //   exit(EXIT_FAILURE);
+  // getNameListMatrice(index, p);
+  /*
+   * 1: english 2: german
+   * zone test
+   **/
+  // int m[HOR_MAX][VER_MAX];
+  // pcurrentMatrice = getMatriceList(index, m);
+  // printf("\nDEBUG:: Nom de la matrice courante %s\n", pcurrentMatrice->name);
+  // for (size_t i = 0; i < HOR_MAX; i++) {
+  //   for (size_t j = 0; j < VER_MAX; j++) {
+  //     printf("%d ", m[i][j]);
+  //   }
+  //   printf("\n");
+  // }
   return 0;
 }
